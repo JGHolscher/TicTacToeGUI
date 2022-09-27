@@ -103,7 +103,7 @@ public void displayWin()
                 System.exit(0);
             }
         }
-        else if(isTie())
+        //else if(isTie())
 
 
     }
