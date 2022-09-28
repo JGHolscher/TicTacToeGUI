@@ -6,11 +6,8 @@ import java.awt.event.ActionListener;
 
 public class TicTacToeFrame extends JFrame
 {
-
     static String player = "X";
     JPanel mainPnl, titlePnl, btnPnl, quitPnl;
-
-
 
     static int moveCnt = 0;
     final int MOVES_FOR_WIN = 5;
@@ -83,10 +80,6 @@ public class TicTacToeFrame extends JFrame
                             } else {
                                 player = "X";
                             }
-
-                            ///.............new TicTacToeTile();...............
-
-
                         }
                 });
                 board[row][col].setFont(new Font("Comic Sans MS", Font.PLAIN, 48));
@@ -106,15 +99,6 @@ public class TicTacToeFrame extends JFrame
                                             this.row = row;
                                             this.col = col;
                                         }
-
-                                        public int getRow() {
-                                            return row;
-                                        }
-
-                                        public int getCol() {
-                                            return col;
-                                        }
-
                                     }
 public void displayResult()
     {
@@ -131,7 +115,7 @@ public void displayResult()
                     clearBoard();
                 }
 
-                if (windowResult == JOptionPane.NO_OPTION) {
+                else{
                     System.exit(0);
                 }
             }
@@ -146,7 +130,7 @@ public void displayResult()
                     clearBoard();
                 }
 
-                if (windowResult == JOptionPane.NO_OPTION) {
+                else{
                     System.exit(0);
                 }
             }
