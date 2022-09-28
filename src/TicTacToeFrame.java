@@ -1,22 +1,15 @@
 import javax.swing.*;
-import javax.swing.border.EtchedBorder;
-import javax.swing.border.LineBorder;
-import javax.swing.border.SoftBevelBorder;
-import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Objects;
-import java.util.Random;
 
-import static java.awt.Color.black;
 
 public class TicTacToeFrame extends JFrame
 {
 
-    String player = "X";
+    static String player = "X";
     JPanel mainPnl, titlePnl, btnPnl, quitPnl;
-    //JOptionPane pane;
+
 
 
     static int moveCnt = 0;
@@ -84,7 +77,7 @@ public class TicTacToeFrame extends JFrame
                         clicked.setText(player);
                         clicked.setEnabled(false);
                         moveCnt++;
-
+                        displayResult();
                             if (player == "X") {
                                 player = "O";
                             } else {
@@ -93,16 +86,16 @@ public class TicTacToeFrame extends JFrame
 
                             ///.............new TicTacToeTile();...............
 
-                            displayResult();
+
                         }
                 });
-                //btnPnl.setFont(new Font("Comic Sans MS", Font.PLAIN, 48));
+                board[row][col].setFont(new Font("Comic Sans MS", Font.PLAIN, 48));
                 btnPnl.add(board[row][col]);
             }
 
         }
     }
-      ////////////////////////////////potentially unneeded or it's the way to connect the halves
+
                                     public class TicTacToeTile extends JButton
                                     {
                                         private int row;
@@ -131,11 +124,7 @@ public void displayResult()
             {
                 System.out.println(player + "win");
                 JOptionPane pane = new JOptionPane();
-                if (player == "X") {
-                    player = "O";
-                } else {
-                    player = "X";
-                }
+
                 int windowResult = JOptionPane.showConfirmDialog(pane, "Game Over.   " + player + "  wins!  Would you like to play again?", " ", JOptionPane.YES_NO_OPTION);
 
                 if (windowResult == JOptionPane.YES_OPTION) {
@@ -182,9 +171,9 @@ public void displayResult()
         for(int col=0; col < COL; col++)
         {
             //.getText().equals
-            if(board[0][col].equals(player) &&
-                    board[1][col].equals(player) &&
-                    board[2][col].equals(player))
+            if(board[0][col].getText().equals(player) &&
+                    board[1][col].getText().equals(player) &&
+                    board[2][col].getText().equals(player))
             {
                 return true;
             }
@@ -197,9 +186,9 @@ public void displayResult()
         // checks for a row win for the specified player
         for(int row=0; row < ROW; row++)
         {
-            if(board[row][0].equals(player) &&
-                    board[row][1].equals(player) &&
-                    board[row][2].equals(player))
+            if(board[row][0].getText().equals(player) &&
+                    board[row][1].getText().equals(player) &&
+                    board[row][2].getText().equals(player))
             {
                 return true;
             }
@@ -210,15 +199,15 @@ public void displayResult()
     private static boolean isDiagnalWin(String player)
     {
         // checks for a diagonal win for the specified player
-        if(board[0][0].equals(player) &&
-                board[1][1].equals(player) &&
-                board[2][2].equals(player) )
+        if(board[0][0].getText().equals(player) &&
+                board[1][1].getText().equals(player) &&
+                board[2][2].getText().equals(player) )
         {
             return true;
         }
-        if(board[0][2].equals(player) &&
-                board[1][1].equals(player) &&
-                board[2][0].equals(player) )
+        if(board[0][2].getText().equals(player) &&
+                board[1][1].getText().equals(player) &&
+                board[2][0].getText().equals(player) )
         {
             return true;
         }
@@ -235,15 +224,15 @@ public void displayResult()
         for(int row=0; row < ROW; row++)
         {
             //.getText().equals
-            if(board[row][0].equals("X") ||
-                    board[row][1].equals("X") ||
-                    board[row][2].equals("X"))
+            if(board[row][0].getText().equals("X") ||
+                    board[row][1].getText().equals("X") ||
+                    board[row][2].getText().equals("X"))
             {
                 xFlag = true; // there is an X in this row
             }
-            if(board[row][0].equals("O") ||
-                    board[row][1].equals("O") ||
-                    board[row][2].equals("O"))
+            if(board[row][0].getText().equals("O") ||
+                    board[row][1].getText().equals("O") ||
+                    board[row][2].getText().equals("O"))
             {
                 oFlag = true; // there is an O in this row
             }
@@ -259,15 +248,15 @@ public void displayResult()
         // Now scan the columns
         for(int col=0; col < COL; col++)
         {
-            if(board[0][col].equals("X") ||
-                    board[1][col].equals("X") ||
-                    board[2][col].equals("X"))
+            if(board[0][col].getText().equals("X") ||
+                    board[1][col].getText().equals("X") ||
+                    board[2][col].getText().equals("X"))
             {
                 xFlag = true; // there is an X in this col
             }
-            if(board[0][col].equals("O") ||
-                    board[1][col].equals("O") ||
-                    board[2][col].equals("O"))
+            if(board[0][col].getText().equals("O") ||
+                    board[1][col].getText().equals("O") ||
+                    board[2][col].getText().equals("O"))
             {
                 oFlag = true; // there is an O in this col
             }
@@ -280,15 +269,15 @@ public void displayResult()
         // Now check for the diagonals
         xFlag = oFlag = false;
 
-        if(board[0][0].equals("X") ||
-                board[1][1].equals("X") ||
-                board[2][2].equals("X") )
+        if(board[0][0].getText().equals("X") ||
+                board[1][1].getText().equals("X") ||
+                board[2][2].getText().equals("X") )
         {
             xFlag = true;
         }
-        if(board[0][0].equals("O") ||
-                board[1][1].equals("O") ||
-                board[2][2].equals("O") )
+        if(board[0][0].getText().equals("O") ||
+                board[1][1].getText().equals("O") ||
+                board[2][2].getText().equals("O") )
         {
             oFlag = true;
         }
@@ -298,15 +287,15 @@ public void displayResult()
         }
         xFlag = oFlag = false;
 
-        if(board[0][2].equals("X") ||
-                board[1][1].equals("X") ||
-                board[2][0].equals("X") )
+        if(board[0][2].getText().equals("X") ||
+                board[1][1].getText().equals("X") ||
+                board[2][0].getText().equals("X") )
         {
             xFlag =  true;
         }
-        if(board[0][2].equals("O") ||
-                board[1][1].equals("O") ||
-                board[2][0].equals("O") )
+        if(board[0][2].getText().equals("O") ||
+                board[1][1].getText().equals("O") ||
+                board[2][0].getText().equals("O") )
         {
             oFlag =  true;
         }
@@ -329,15 +318,19 @@ public void displayResult()
     private static void clearBoard()//DONE
     {
         // sets all the board elements to a space
-        for( int row = 0; row < 3; row++)
-        {
-            for (int col = 0; col < 3; col++)
-            {
-                board[row][col].setText(" ");
-                board[row][col].setEnabled(true);
-                moveCnt = 0;
+            for (int row = 0; row < 3; row++) {
+                for (int col = 0; col < 3; col++) {
+                    board[row][col].setText(" ");
+                    board[row][col].setEnabled(true);
+                    moveCnt = 0;
+                    player = "X";
+                }
             }
-        }
+            if (player == "X") {
+                player = "O";
+                } else {
+                player = "X";
+            }
     }
     private void createQuitPanel(){ //DONE
         quitPnl = new JPanel();
