@@ -91,10 +91,11 @@ public class TicTacToeFrame extends JFrame
                                 player = "X";
                             }
 
-                            
+
                             displayResult();
                         }
                 });
+                //btnPnl.setFont(new Font("Comic Sans MS", Font.PLAIN, 48));
                 btnPnl.add(board[row][col]);
             }
 
@@ -105,11 +106,16 @@ public void displayResult()
     {
         if(moveCnt >= MOVES_FOR_WIN)
         {
-            if(isWin(player))
+            if(isWin(player) == true)
             {
                 System.out.println(player + "win");
                 JOptionPane pane = new JOptionPane();
-                int windowResult = JOptionPane.showConfirmDialog(pane, "Game Over. " + player + "wins! + Would you like to play again?", " ", JOptionPane.YES_NO_OPTION);
+                if (player == "X") {
+                    player = "O";
+                } else {
+                    player = "X";
+                }
+                int windowResult = JOptionPane.showConfirmDialog(pane, "Game Over.   " + player + "  wins!  Would you like to play again?", " ", JOptionPane.YES_NO_OPTION);
 
                 if (windowResult == JOptionPane.YES_OPTION) {
                     clearBoard();
@@ -122,7 +128,7 @@ public void displayResult()
         }
         if(moveCnt >= MOVES_FOR_TIE)
         {
-            if(isTie()) {
+            if(isTie() == true) {
                 JOptionPane pane = new JOptionPane();
                 int windowResult = JOptionPane.showConfirmDialog(pane, "Tie! Would you like to play again?", " ", JOptionPane.YES_NO_OPTION);
 
@@ -140,19 +146,6 @@ public void displayResult()
 
 
     }
-    private static void clearBoard()
-    {
-        // sets all the board elements to a space
-        for( int row = 0; row < 3; row++)
-        {
-            for (int col = 0; col < 3; col++)
-            {
-                board[row][col].setText(" ");
-                board[row][col].setEnabled(true);
-                moveCnt = 0;
-            }
-        }
-    }
     private static boolean isWin(String player)
     {
         if(isColWin(player) || isRowWin(player) || isDiagnalWin(player))
@@ -167,9 +160,9 @@ public void displayResult()
         // checks for a col win for specified player
         for(int col=0; col < COL; col++)
         {
-            if(board[0][col].equals(player) &&
-                    board[1][col].equals(player) &&
-                    board[2][col].equals(player))
+            if(board[0][col].getText().equals(player) &&
+                    board[1][col].getText().equals(player) &&
+                    board[2][col].getText().equals(player))
             {
                 return true;
             }
@@ -182,9 +175,9 @@ public void displayResult()
         // checks for a row win for the specified player
         for(int row=0; row < ROW; row++)
         {
-            if(board[row][0].equals(player) &&
-                    board[row][1].equals(player) &&
-                    board[row][2].equals(player))
+            if(board[row][0].getText().equals(player) &&
+                    board[row][1].getText().equals(player) &&
+                    board[row][2].getText().equals(player))
             {
                 return true;
             }
@@ -219,6 +212,7 @@ public void displayResult()
         // Check for row ties
         for(int row=0; row < ROW; row++)
         {
+            //.getText().equals
             if(board[row][0].equals("X") ||
                     board[row][1].equals("X") ||
                     board[row][2].equals("X"))
@@ -310,7 +304,19 @@ public void displayResult()
 
 
 
-
+    private static void clearBoard()//DONE
+    {
+        // sets all the board elements to a space
+        for( int row = 0; row < 3; row++)
+        {
+            for (int col = 0; col < 3; col++)
+            {
+                board[row][col].setText(" ");
+                board[row][col].setEnabled(true);
+                moveCnt = 0;
+            }
+        }
+    }
     private void createQuitPanel(){ //DONE
         quitPnl = new JPanel();
 
