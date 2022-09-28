@@ -16,7 +16,12 @@ public class TicTacToeFrame extends JFrame
 
     String player = "X";
     JPanel mainPnl, titlePnl, btnPnl, quitPnl;
-    JOptionPane pane;
+    //JOptionPane pane;
+
+
+    static int moveCnt = 0;
+    final int MOVES_FOR_WIN = 5;
+    final int MOVES_FOR_TIE = 7;
 
     private static final int ROW = 3;
     private static final int COL = 3;
@@ -78,6 +83,7 @@ public class TicTacToeFrame extends JFrame
                         JButton clicked = (JButton) e.getSource();
                         clicked.setText(player);
                         clicked.setEnabled(false);
+                        moveCnt++;
 
                             if (player == "X") {
                                 player = "O";
@@ -85,7 +91,7 @@ public class TicTacToeFrame extends JFrame
                                 player = "X";
                             }
 
-                            //if (clicked >= 5)
+                            
                             displayResult();
                         }
                 });
@@ -97,32 +103,40 @@ public class TicTacToeFrame extends JFrame
 
 public void displayResult()
     {
-        if(isWin(player) == true)
+        if(moveCnt >= MOVES_FOR_WIN)
         {
-            System.out.println(player + "win");
-            JOptionPane pane = new JOptionPane();
-            int windowResult = JOptionPane.showConfirmDialog(pane, "Game Over. " + player + "wins! + Would you like to play again?", " ", JOptionPane.YES_NO_OPTION);
+            if(isWin(player))
+            {
+                System.out.println(player + "win");
+                JOptionPane pane = new JOptionPane();
+                int windowResult = JOptionPane.showConfirmDialog(pane, "Game Over. " + player + "wins! + Would you like to play again?", " ", JOptionPane.YES_NO_OPTION);
 
-            if (windowResult == JOptionPane.YES_OPTION) {
-                clearBoard();
-            }
+                if (windowResult == JOptionPane.YES_OPTION) {
+                    clearBoard();
+                }
 
-            if (windowResult == JOptionPane.NO_OPTION) {
-                System.exit(0);
-            }
-        }
-        else if(isTie()) {
-            JOptionPane pane = new JOptionPane();
-            int windowResult = JOptionPane.showConfirmDialog(pane, "Tie! Would you like to play again?", " ", JOptionPane.YES_NO_OPTION);
-
-            if (windowResult == JOptionPane.YES_OPTION) {
-                clearBoard();
-            }
-
-            if (windowResult == JOptionPane.NO_OPTION) {
-                System.exit(0);
+                if (windowResult == JOptionPane.NO_OPTION) {
+                    System.exit(0);
+                }
             }
         }
+        if(moveCnt >= MOVES_FOR_TIE)
+        {
+            if(isTie()) {
+                JOptionPane pane = new JOptionPane();
+                int windowResult = JOptionPane.showConfirmDialog(pane, "Tie! Would you like to play again?", " ", JOptionPane.YES_NO_OPTION);
+
+                if (windowResult == JOptionPane.YES_OPTION) {
+                    clearBoard();
+                }
+
+                if (windowResult == JOptionPane.NO_OPTION) {
+                    System.exit(0);
+                }
+            }
+
+        }
+
 
 
     }
@@ -134,6 +148,8 @@ public void displayResult()
             for (int col = 0; col < 3; col++)
             {
                 board[row][col].setText(" ");
+                board[row][col].setEnabled(true);
+                moveCnt = 0;
             }
         }
     }
