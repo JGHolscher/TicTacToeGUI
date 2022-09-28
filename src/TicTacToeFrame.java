@@ -26,7 +26,7 @@ public class TicTacToeFrame extends JFrame
     private static final int ROW = 3;
     private static final int COL = 3;
 
-    private static JButton[][] board = new JButton[3][3];
+    static TicTacToeTile[][] board = new TicTacToeTile[3][3];
 
     JButton quitBtn;
 
@@ -73,7 +73,7 @@ public class TicTacToeFrame extends JFrame
         {
             for (int col = 0; col < 3; col++)
             {
-                board[row][col] = new JButton();
+                board[row][col] = new TicTacToeTile(row, col);
                 board[row][col].setText(" ");
                 board[row][col].addActionListener(new ActionListener()
                 {
@@ -91,6 +91,7 @@ public class TicTacToeFrame extends JFrame
                                 player = "X";
                             }
 
+                            ///.............new TicTacToeTile();...............
 
                             displayResult();
                         }
