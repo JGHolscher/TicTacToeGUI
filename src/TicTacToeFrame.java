@@ -32,7 +32,7 @@ public class TicTacToeFrame extends JFrame
 
     JLabel titleLbl;
 
-    public TicTacToeFrame(){
+    public TicTacToeFrame(){ //DONE
         setTitle("TicTacToe Game");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -58,7 +58,7 @@ public class TicTacToeFrame extends JFrame
 
     }
 
-    private void createButtonPanel()
+    private void createButtonPanel() //DONE
     {
         btnPnl = new JPanel();
         btnPnl.setLayout(new GridLayout(3,3));
@@ -101,7 +101,26 @@ public class TicTacToeFrame extends JFrame
 
         }
     }
+    public class TicTacToeTile extends JButton
+    {
+        private int row;
+        private int col;
 
+        public TicTacToeTile(int row, int col) {
+            super();
+            this.row = row;
+            this.col = col;
+        }
+
+        public int getRow() {
+            return row;
+        }
+
+        public int getCol() {
+            return col;
+        }
+
+    }
 public void displayResult()
     {
         if(moveCnt >= MOVES_FOR_WIN)
@@ -160,9 +179,10 @@ public void displayResult()
         // checks for a col win for specified player
         for(int col=0; col < COL; col++)
         {
-            if(board[0][col].getText().equals(player) &&
-                    board[1][col].getText().equals(player) &&
-                    board[2][col].getText().equals(player))
+            //.getText().equals
+            if(board[0][col].equals(player) &&
+                    board[1][col].equals(player) &&
+                    board[2][col].equals(player))
             {
                 return true;
             }
@@ -175,9 +195,9 @@ public void displayResult()
         // checks for a row win for the specified player
         for(int row=0; row < ROW; row++)
         {
-            if(board[row][0].getText().equals(player) &&
-                    board[row][1].getText().equals(player) &&
-                    board[row][2].getText().equals(player))
+            if(board[row][0].equals(player) &&
+                    board[row][1].equals(player) &&
+                    board[row][2].equals(player))
             {
                 return true;
             }
