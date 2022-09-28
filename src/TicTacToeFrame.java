@@ -101,26 +101,27 @@ public class TicTacToeFrame extends JFrame
 
         }
     }
-    public class TicTacToeTile extends JButton
-    {
-        private int row;
-        private int col;
+      ////////////////////////////////potentially unneeded or it's the way to connect the halves
+                                    public class TicTacToeTile extends JButton
+                                    {
+                                        private int row;
+                                        private int col;
 
-        public TicTacToeTile(int row, int col) {
-            super();
-            this.row = row;
-            this.col = col;
-        }
+                                        public TicTacToeTile(int row, int col) {
+                                            super();
+                                            this.row = row;
+                                            this.col = col;
+                                        }
 
-        public int getRow() {
-            return row;
-        }
+                                        public int getRow() {
+                                            return row;
+                                        }
 
-        public int getCol() {
-            return col;
-        }
+                                        public int getCol() {
+                                            return col;
+                                        }
 
-    }
+                                    }
 public void displayResult()
     {
         if(moveCnt >= MOVES_FOR_WIN)
