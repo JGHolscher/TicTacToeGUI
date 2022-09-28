@@ -18,9 +18,10 @@ public class TicTacToeFrame extends JFrame
     JPanel mainPnl, titlePnl, btnPnl, quitPnl;
     JOptionPane pane;
 
-    static int ROW = 3;
-    static int COL = 3;
-    static JButton[][] board = new JButton[3][3];
+    private static final int ROW = 3;
+    private static final int COL = 3;
+
+    private static JButton[][] board = new JButton[3][3];
 
     JButton quitBtn;
 
@@ -76,24 +77,31 @@ public class TicTacToeFrame extends JFrame
                     {
                         JButton clicked = (JButton) e.getSource();
                         clicked.setText(player);
+                        clicked.setEnabled(false);
 
-                        if(player == "X")
-                        {player = "O";}
-                        else {player = "X";}
+                            if (player == "X") {
+                                player = "O";
+                            } else {
+                                player = "X";
+                            }
 
-                       // displayResult();
-                    }
+                            //if (clicked >= 5)
+                            displayResult();
+                        }
                 });
                 btnPnl.add(board[row][col]);
             }
+
         }
     }
 
-public void displayWin()
+public void displayResult()
     {
         if(isWin(player) == true)
         {
-            int windowResult = JOptionPane.showConfirmDialog(pane, "Game Over. " + player + "wins! + Would you like to play again?", "f", JOptionPane.YES_NO_OPTION);
+            System.out.println(player + "win");
+            JOptionPane pane = new JOptionPane();
+            int windowResult = JOptionPane.showConfirmDialog(pane, "Game Over. " + player + "wins! + Would you like to play again?", " ", JOptionPane.YES_NO_OPTION);
 
             if (windowResult == JOptionPane.YES_OPTION) {
                 clearBoard();
@@ -103,7 +111,18 @@ public void displayWin()
                 System.exit(0);
             }
         }
-        //else if(isTie())
+        else if(isTie()) {
+            JOptionPane pane = new JOptionPane();
+            int windowResult = JOptionPane.showConfirmDialog(pane, "Tie! Would you like to play again?", " ", JOptionPane.YES_NO_OPTION);
+
+            if (windowResult == JOptionPane.YES_OPTION) {
+                clearBoard();
+            }
+
+            if (windowResult == JOptionPane.NO_OPTION) {
+                System.exit(0);
+            }
+        }
 
 
     }
@@ -157,11 +176,9 @@ public void displayWin()
         return false; // no row win
     }
 
-
     private static boolean isDiagnalWin(String player)
     {
         // checks for a diagonal win for the specified player
-
         if(board[0][0].equals(player) &&
                 board[1][1].equals(player) &&
                 board[2][2].equals(player) )
